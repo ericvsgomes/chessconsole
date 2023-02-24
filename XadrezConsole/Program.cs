@@ -1,4 +1,4 @@
-﻿using Board;
+﻿using XadrezConsole.BoardEntities;
 
 namespace XadrezConsole
 {
@@ -6,9 +6,7 @@ namespace XadrezConsole
     {
         static void Main(string[] args)
         {
-            Position p = new Position(3, 4);
-
-            Console.WriteLine("Posição: " + p);
+            Board board = new Board(8, 8);
         }
     }
 }

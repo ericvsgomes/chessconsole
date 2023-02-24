@@ -1,4 +1,4 @@
-﻿namespace Board
+﻿namespace XadrezConsole.BoardEntities
 {
     internal class Position
     {
