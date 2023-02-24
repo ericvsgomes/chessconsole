@@ -12,5 +12,10 @@
             Columns = columns;
             Piece = new Piece[lines, columns];
         }
+
+        public Piece ScreenPiece(int line, int column)
+        {
+            return Piece[line,column];
+        }
     }
 }
