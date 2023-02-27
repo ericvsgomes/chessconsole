@@ -1,4 +1,4 @@
-﻿namespace XadrezConsole.BoardEntities.Enums
+﻿namespace ChessConsole.BoardEntities.Enums
 {
     internal enum Color
     {

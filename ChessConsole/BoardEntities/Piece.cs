@@ -1,6 +1,6 @@
-﻿using XadrezConsole.BoardEntities.Enums;
+﻿using ChessConsole.BoardEntities.Enums;
 
-namespace XadrezConsole.BoardEntities
+namespace ChessConsole.BoardEntities
 {
     internal class Piece
     {
@@ -9,9 +9,8 @@ namespace XadrezConsole.BoardEntities
         public int AmountOfMoves { get; set; }
         public Board Board { get; set; }
 
-        public Piece(Position position, Color color, Board board)
+        public Piece(Color color, Board board)
         {
-            Position = position;
             Color = color;            
             Board = board;
             AmountOfMoves = 0;

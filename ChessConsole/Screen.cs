@@ -1,6 +1,6 @@
-﻿using XadrezConsole.BoardEntities;
+﻿using ChessConsole.BoardEntities;
 
-namespace XadrezConsole
+namespace ChessConsole
 {
     internal class Screen
     {

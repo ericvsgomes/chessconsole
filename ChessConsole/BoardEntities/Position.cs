@@ -1,4 +1,4 @@
-﻿namespace XadrezConsole.BoardEntities
+﻿namespace ChessConsole.BoardEntities
 {
     internal class Position
     {
