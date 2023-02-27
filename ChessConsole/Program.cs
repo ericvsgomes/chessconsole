@@ -7,14 +7,21 @@ namespace ChessConsole
     internal class Program
     {
         static void Main(string[] args)
-        {
-            Board board = new Board(8, 8);
+        {           
+            try
+            {
+                Board board = new Board(8, 8);
 
-            board.PutPiece(new Rook(board, Color.Preta), new Position(0, 0));
-            board.PutPiece(new Rook(board, Color.Preta), new Position(1, 3));
-            board.PutPiece(new King(board, Color.Preta), new Position(2, 4));
+                board.PutPiece(new Rook(board, Color.Preta), new Position(0, 0));
+                board.PutPiece(new Rook(board, Color.Preta), new Position(1, 8));
+                board.PutPiece(new King(board, Color.Preta), new Position(0, 2));
 
-            Screen.PrintBoard(board);
+                Screen.PrintBoard(board);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

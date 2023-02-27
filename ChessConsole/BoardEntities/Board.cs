@@ -1,4 +1,6 @@
-﻿namespace ChessConsole.BoardEntities
+﻿using ChessConsole.BoardEntities.Exceptions;
+
+namespace ChessConsole.BoardEntities
 {
     internal class Board
     {
@@ -18,10 +20,42 @@
             return Piece[line,column];
         }
 
-        public void PutPiece(Piece p, Position pos)
+        public Piece ScreenPiece(Position position)
         {
-            Piece[pos.Line, pos.Column] = p;
-            p.Position = pos;
+            return Piece[position.Line, position.Column];
+        }
+
+        public bool ExistPiece(Position position)
+        {
+            ValidatePisition(position);
+            return ScreenPiece(position) != null;
+        }
+
+        public void PutPiece(Piece p, Position position)
+        {
+            if(ExistPiece(position))
+            {
+                throw new BoardException("There is already a piece in that position.");
+            }
+            Piece[position.Line, position.Column] = p;
+            p.Position = position;
+        }
+
+        public bool ValidPisition(Position position)
+        {
+            if (position.Line < 0 || position.Line >= Lines || position.Column < 0 || position.Column >= Columns)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public void ValidatePisition(Position position)
+        {
+            if (!ValidPisition(position))
+            {
+                throw new BoardException("Invalid position.");
+            }
         }
     }
 }
