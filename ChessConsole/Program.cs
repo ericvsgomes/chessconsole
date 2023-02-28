@@ -13,10 +13,11 @@ namespace ChessConsole
                 Board board = new Board(8, 8);
 
                 board.PutPiece(new Rook(board, Color.Preta), new Position(0, 0));
-                board.PutPiece(new Rook(board, Color.Preta), new Position(1, 8));
+                board.PutPiece(new Rook(board, Color.Preta), new Position(1, 7));
                 board.PutPiece(new King(board, Color.Preta), new Position(0, 2));
 
                 Screen.PrintBoard(board);
+
             }
             catch (Exception e)
             {
