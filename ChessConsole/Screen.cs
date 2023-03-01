@@ -1,5 +1,6 @@
 ﻿using ChessConsole.BoardEntities;
 using ChessConsole.BoardEntities.Enums;
+using ChessConsole.ChessEntities;
 
 namespace ChessConsole
 {
@@ -25,6 +26,14 @@ namespace ChessConsole
                 Console.WriteLine();
             }
             Console.WriteLine("  a b c d e f g h");
+        }
+
+        public static ChessPosition ReadChessPosition()
+        {
+            string s = Console.ReadLine();
+            char collumn = s[0];
+            int line = int.Parse(s[1] + "");
+            return new ChessPosition(collumn, line);
         }
 
         public static void PrintPiece(Piece piece)

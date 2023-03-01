@@ -41,6 +41,18 @@ namespace ChessConsole.BoardEntities
             p.Position = position;
         }
 
+        public Piece RemovePiece(Position position)
+        {
+            if (ScreenPiece(position) == null)
+            {
+                return null;
+            }
+            Piece aux = ScreenPiece(position);
+            aux.Position = null;
+            Piece[position.Line, position.Column] = null;
+            return aux;
+        }
+
         public bool ValidPisition(Position position)
         {
             if (position.Line < 0 || position.Line >= Lines || position.Column < 0 || position.Column >= Columns)

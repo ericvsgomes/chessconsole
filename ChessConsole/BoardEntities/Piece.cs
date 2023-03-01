@@ -15,5 +15,10 @@ namespace ChessConsole.BoardEntities
             Board = board;
             AmountOfMoves = 0;
         }
+
+        public void AddAmountOfMoves()
+        {
+            AmountOfMoves++;
+        }
     }
 }
