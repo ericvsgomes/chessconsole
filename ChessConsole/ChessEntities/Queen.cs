@@ -9,6 +9,11 @@ namespace ChessConsole.ChessEntities
         {
         }
 
+        public override bool[,] PosibleMove()
+        {
+            throw new NotImplementedException();
+        }
+
         public override string ToString()
         {
             return "Q";

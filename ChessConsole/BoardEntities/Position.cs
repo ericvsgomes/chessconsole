@@ -1,4 +1,6 @@
-﻿namespace ChessConsole.BoardEntities
+﻿using System.Data.Common;
+
+namespace ChessConsole.BoardEntities
 {
     internal class Position
     {
@@ -6,6 +8,12 @@
         public int Column { get; set; }
 
         public Position(int line, int column)
+        {
+            Line = line;
+            Column = column;
+        }
+
+        public void DefineValues(int line, int column)
         {
             Line = line;
             Column = column;
