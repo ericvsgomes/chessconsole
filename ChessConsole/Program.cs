@@ -13,21 +13,37 @@ namespace ChessConsole
 
                 while (!game.Finished)
                 {
-                    Console.Clear();
-                    Screen.PrintBoard(game.Board);
+                    try
+                    {
+                        Console.Clear();
+                        Screen.PrintBoard(game.Board);
 
-                    Console.Write("Origem: ");
-                    Position origin = Screen.ReadChessPosition().ToPosition();
+                        Console.WriteLine();
+                        Console.WriteLine("Turn: " + game.Turn);
+                        Console.WriteLine("Waiting for move: " + game.CurrentPlayer);
 
-                    bool[,] possiblePosition = game.Board.ScreenPiece(origin).PosibleMove();
+                        Console.WriteLine();
+                        Console.Write("Origin: ");
+                        Position origin = Screen.ReadChessPosition().ToPosition();
+                        game.ValidateOriginPosition(origin);
 
-                    Console.Clear();
-                    Screen.PrintBoard(game.Board, possiblePosition);
+                        bool[,] possiblePosition = game.Board.ScreenPiece(origin).PosibleMove();
 
-                    Console.Write("Destino: ");
-                    Position destiny = Screen.ReadChessPosition().ToPosition();
+                        Console.Clear();
+                        Screen.PrintBoard(game.Board, possiblePosition);
 
-                    game.ExecuteMove(origin, destiny);
+                        Console.WriteLine();
+                        Console.Write("Destiny: ");
+                        Position destiny = Screen.ReadChessPosition().ToPosition();
+                        game.ValidateDestinyPosition(origin, destiny);
+
+                        game.PerformsMove(origin, destiny);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.ReadLine();
+                    }
                 }              
             }
             catch (Exception e)

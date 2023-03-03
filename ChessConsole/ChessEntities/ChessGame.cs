@@ -1,13 +1,14 @@
 ﻿using ChessConsole.BoardEntities;
 using ChessConsole.BoardEntities.Enums;
+using ChessConsole.BoardEntities.Exceptions;
 
 namespace ChessConsole.ChessEntities
 {
     internal class ChessGame
     {
         public Board Board { get; private set; }
-        private int Turn;
-        private Color CurrentPlayer;
+        public int Turn { get; private set; }
+        public Color CurrentPlayer { get; private set; }
         public bool Finished { get; private set; }
 
         public ChessGame()
@@ -25,6 +26,48 @@ namespace ChessConsole.ChessEntities
             p.AddAmountOfMoves();
             Piece pieceCaptured = Board.RemovePiece(destiny);
             Board.PutPiece(p, destiny);
+        }
+
+        public void PerformsMove (Position origin, Position destiny)
+        {
+            ExecuteMove(origin, destiny);
+            Turn++;
+            ChangePlayer();
+        }
+
+        public void ValidateOriginPosition(Position pos)
+        {
+            if (Board.ScreenPiece(pos) == null)
+            {
+                throw new BoardException("There is no piece in the chosen origin position.");
+            }
+            if (CurrentPlayer != Board.ScreenPiece(pos).Color)
+            {
+                throw new BoardException("The chosen source piece is not yours.");
+            }
+            if (!Board.ScreenPiece(pos).ExistPosibleMove())
+            {
+                throw new BoardException("There are no possible moves for the chosen piece.");
+            }
+        }
+
+        public void ValidateDestinyPosition(Position origin, Position destiny)
+        {
+            if (!Board.ScreenPiece(origin).CanMoveTo(destiny))
+            {
+                throw new BoardException("Invalid destiny position.");
+            }
+        }
+
+        private void ChangePlayer()
+        {
+            if (CurrentPlayer == Color.White)
+            {
+                CurrentPlayer = Color.Black;
+            } else
+            {
+                CurrentPlayer = Color.White;
+            }
         }
 
         private void PutPieces()
