@@ -23,7 +23,7 @@ namespace ChessConsole
                         Position origin = Screen.ReadChessPosition().ToPosition();
                         game.ValidateOriginPosition(origin);
 
-                        bool[,] possiblePosition = game.Board.ScreenPiece(origin).PosibleMove();
+                        bool[,] possiblePosition = game.Board.ScreenPiece(origin).PosiblesMoves();
 
                         Console.Clear();
                         Screen.PrintBoard(game.Board, possiblePosition);

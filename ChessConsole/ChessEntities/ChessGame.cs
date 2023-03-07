@@ -99,7 +99,7 @@ namespace ChessConsole.ChessEntities
 
         public void ValidateDestinyPosition(Position origin, Position destiny)
         {
-            if (!Board.ScreenPiece(origin).CanMoveTo(destiny))
+            if (!Board.ScreenPiece(origin).PosibleMove(destiny))
             {
                 throw new BoardException("Invalid destiny position.");
             }
@@ -178,7 +178,7 @@ namespace ChessConsole.ChessEntities
 
             foreach (Piece x in PiecesInGame(Opponent(color)))
             {
-                bool[,] vector = x.PosibleMove();
+                bool[,] vector = x.PosiblesMoves();
                 if (vector[k.Position.Line, k.Position.Column])
                 {
                     return true;
@@ -195,7 +195,7 @@ namespace ChessConsole.ChessEntities
             }
             foreach (Piece x in PiecesInGame(color))
             {
-                bool[,] vector = x.PosibleMove();
+                bool[,] vector = x.PosiblesMoves();
                 for (int i = 0; i < Board.Columns; i++)
                 {
                     for (int j = 0; j < Board.Columns; j++)

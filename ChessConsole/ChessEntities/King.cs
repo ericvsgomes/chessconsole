@@ -15,7 +15,7 @@ namespace ChessConsole.ChessEntities
             return piece == null || piece.Color != Color;
         }
 
-        public override bool[,] PosibleMove()
+        public override bool[,] PosiblesMoves()
         {
             bool[,] array = new bool[Board.Lines, Board.Columns];
 

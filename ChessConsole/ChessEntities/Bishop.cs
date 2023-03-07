@@ -9,7 +9,7 @@ namespace ChessConsole.ChessEntities
         {
         }
 
-        public override bool[,] PosibleMove()
+        public override bool[,] PosiblesMoves()
         {
             throw new NotImplementedException();
         }

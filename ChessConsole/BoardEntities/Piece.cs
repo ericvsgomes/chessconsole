@@ -28,7 +28,7 @@ namespace ChessConsole.BoardEntities
 
         public bool ExistPosibleMove()
         {
-            bool[,] array = PosibleMove();
+            bool[,] array = PosiblesMoves();
             for (int i = 0; i < Board.Lines; i++)
             {
                 for (int j = 0; j < Board.Columns; j++)
@@ -42,11 +42,11 @@ namespace ChessConsole.BoardEntities
             return false;
         }
 
-        public bool CanMoveTo(Position pos)
+        public bool PosibleMove(Position pos)
         {
-            return PosibleMove()[pos.Line, pos.Column];
+            return PosiblesMoves()[pos.Line, pos.Column];
         }
 
-        public abstract bool[,] PosibleMove();
+        public abstract bool[,] PosiblesMoves();
     }
 }
