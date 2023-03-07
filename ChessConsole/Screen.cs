@@ -15,6 +15,10 @@ namespace ChessConsole
             Console.WriteLine();
             Console.WriteLine("Turn: " + game.Turn);
             Console.WriteLine("Waiting for move: " + game.CurrentPlayer);
+            if (game.Check)
+            {
+                Console.WriteLine("CHECK!");
+            }
         }
 
         public static void PrintCapturedPieces(ChessGame game)

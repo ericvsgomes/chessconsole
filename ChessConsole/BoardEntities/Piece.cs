@@ -21,6 +21,11 @@ namespace ChessConsole.BoardEntities
             AmountOfMoves++;
         }
 
+        public void SubtractAmountOfMoves()
+        {
+            AmountOfMoves--;
+        }
+
         public bool ExistPosibleMove()
         {
             bool[,] array = PosibleMove();
