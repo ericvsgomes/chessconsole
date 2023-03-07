@@ -40,7 +40,9 @@ namespace ChessConsole
                         Console.WriteLine(e.Message);
                         Console.ReadLine();
                     }
-                }              
+                }
+                Console.Clear();
+                Screen.PrintGame(game);
             }
             catch (Exception e)
             {

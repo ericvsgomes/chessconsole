@@ -14,10 +14,18 @@ namespace ChessConsole
             PrintCapturedPieces(game);
             Console.WriteLine();
             Console.WriteLine("Turn: " + game.Turn);
-            Console.WriteLine("Waiting for move: " + game.CurrentPlayer);
-            if (game.Check)
+            if (!game.Finished)
             {
-                Console.WriteLine("CHECK!");
+                Console.WriteLine("Waiting for move: " + game.CurrentPlayer);
+                if (game.Check)
+                {
+                    Console.WriteLine("CHECK!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("CHECKMATE!");
+                Console.WriteLine(game.CurrentPlayer + " Winner!");
             }
         }
 
@@ -62,7 +70,7 @@ namespace ChessConsole
         public static void PrintBoard(Board board, bool[,] possiblePosition)
         {
             ConsoleColor backgroundOrigin = Console.BackgroundColor;
-            ConsoleColor backgroundChanged  = ConsoleColor.DarkGray;
+            ConsoleColor backgroundChanged = ConsoleColor.DarkGray;
 
             for (int i = 0; i < board.Lines; i++)
             {
@@ -82,7 +90,7 @@ namespace ChessConsole
                 Console.WriteLine();
                 Console.BackgroundColor = backgroundOrigin;
             }
-            Console.WriteLine("  a b c d e f g h");            
+            Console.WriteLine("  a b c d e f g h");
         }
 
         public static ChessPosition ReadChessPosition()
@@ -98,7 +106,7 @@ namespace ChessConsole
             if (piece == null)
             {
                 Console.Write("- ");
-            } 
+            }
             else
             {
                 if (piece.Color == Color.White)
