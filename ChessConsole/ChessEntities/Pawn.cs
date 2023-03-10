@@ -6,8 +6,11 @@ namespace ChessConsole.ChessEntities
 {
     internal class Pawn : Piece
     {
-        public Pawn(Board board, Color color) : base(color, board)
+        private ChessGame Game;
+
+        public Pawn(Board board, Color color, ChessGame game) : base(color, board)
         {
+            Game = game;
         }
         
         private bool ExistEnemy(Position position)
@@ -51,6 +54,21 @@ namespace ChessConsole.ChessEntities
                 {
                     array[pos.Line, pos.Column] = true;
                 }
+
+                // #jogada especial En Passant
+                if (Position.Line == 3)
+                {
+                    Position left = new Position(Position.Line, Position.Column - 1);
+                    if (Board.ValidPisition(left) && ExistEnemy(left) && Board.ScreenPiece(left) == Game.VulnerableEnPassant)
+                    {
+                        array[left.Line -1, left.Column] = true;
+                    }
+                    Position rigth = new Position(Position.Line, Position.Column + 1);
+                    if (Board.ValidPisition(rigth) && ExistEnemy(rigth) && Board.ScreenPiece(rigth) == Game.VulnerableEnPassant)
+                    {
+                        array[rigth.Line -1, rigth.Column] = true;
+                    }
+                }
             }
             else
             {
@@ -76,6 +94,21 @@ namespace ChessConsole.ChessEntities
                 if (Board.ValidPisition(pos) && ExistEnemy(pos))
                 {
                     array[pos.Line, pos.Column] = true;
+                }
+
+                // #jogada especial En Passant
+                if (Position.Line == 4)
+                {
+                    Position left = new Position(Position.Line, Position.Column - 1);
+                    if (Board.ValidPisition(left) && ExistEnemy(left) && Board.ScreenPiece(left) == Game.VulnerableEnPassant)
+                    {
+                        array[left.Line + 1, left.Column] = true;
+                    }
+                    Position rigth = new Position(Position.Line, Position.Column + 1);
+                    if (Board.ValidPisition(rigth) && ExistEnemy(rigth) && Board.ScreenPiece(rigth) == Game.VulnerableEnPassant)
+                    {
+                        array[rigth.Line + 1, rigth.Column] = true;
+                    }
                 }
             }
 
