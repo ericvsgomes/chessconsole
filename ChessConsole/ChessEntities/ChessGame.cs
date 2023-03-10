@@ -143,6 +143,21 @@ namespace ChessConsole.ChessEntities
                 throw new BoardException("You can't put yourself in check!");
             }
 
+            Piece p = Board.ScreenPiece(destiny);
+
+            // #jogadaespcial promocao
+            if (p is Pawn)
+            {
+                if ((p.Color == Color.White && destiny.Line == 0) || (p.Color == Color.Black && destiny.Line == 7))
+                {
+                    p = Board.RemovePiece(destiny);
+                    Pieces.Remove(p);
+                    Piece queen = new Queen(Board, p.Color);
+                    Board.PutPiece(queen, destiny);
+                    Pieces.Add(queen);
+                }
+            }
+
             if (IsInCheck(Opponent(CurrentPlayer)))
             {
                 Check = true;
@@ -161,8 +176,6 @@ namespace ChessConsole.ChessEntities
                 Turn++;
                 ChangePlayer();
             }
-
-            Piece p = Board.ScreenPiece(destiny);
 
             // #jogada especial EnPassant
             if (p is Pawn && (destiny.Line == origin.Line - 2 || destiny.Line == origin.Line + 2))
