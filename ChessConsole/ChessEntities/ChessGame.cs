@@ -1,6 +1,7 @@
 ﻿using ChessConsole.BoardEntities;
 using ChessConsole.BoardEntities.Enums;
 using ChessConsole.BoardEntities.Exceptions;
+using System.ComponentModel.Design.Serialization;
 using System.Reflection.PortableExecutable;
 
 namespace ChessConsole.ChessEntities
@@ -37,6 +38,27 @@ namespace ChessConsole.ChessEntities
             {
                 Captured.Add(pieceCaptured);
             }
+
+            // #jogadaespecial roque pequeno
+            if (p is King && destiny.Column == origin.Column + 2)
+            {
+                Position originRook = new Position(origin.Line, origin.Column + 3);
+                Position destinyRook = new Position(origin.Line, origin.Column + 1);
+                Piece rook = Board.RemovePiece(originRook);
+                rook.AddAmountOfMoves();
+                Board.PutPiece(rook, destinyRook);
+            }
+
+            // #jogadaespecial roque grande
+            if (p is King && destiny.Column == origin.Column - 2)
+            {
+                Position originRook = new Position(origin.Line, origin.Column - 4);
+                Position destinyRook = new Position(origin.Line, origin.Column - 1);
+                Piece rook = Board.RemovePiece(originRook);
+                rook.AddAmountOfMoves();
+                Board.PutPiece(rook, destinyRook);
+            }
+
             return pieceCaptured;
         }
 
@@ -50,6 +72,26 @@ namespace ChessConsole.ChessEntities
                 Captured.Remove(pieceCaptured);
             }
             Board.PutPiece(p, origin);
+
+            // #jogadaespecial roque pequeno
+            if (p is King && destiny.Line == origin.Column + 2)
+            {
+                Position originRook = new Position(origin.Line, origin.Column + 3);
+                Position destinyRook = new Position(origin.Line, origin.Column + 1);
+                Piece rook = Board.RemovePiece(destinyRook);
+                rook.SubtractAmountOfMoves();
+                Board.PutPiece(rook, originRook);
+            }
+
+            // #jogadaespecial roque grande
+            if (p is King && destiny.Line == origin.Column - 2)
+            {
+                Position originRook = new Position(origin.Line, origin.Column - 4);
+                Position destinyRook = new Position(origin.Line, origin.Column - 1);
+                Piece rook = Board.RemovePiece(destinyRook);
+                rook.SubtractAmountOfMoves();
+                Board.PutPiece(rook, originRook);
+            }
         }
 
         public void PerformsMove(Position origin, Position destiny)
@@ -230,7 +272,7 @@ namespace ChessConsole.ChessEntities
             PutNewPiece('b', 1, new Knight(Board, Color.White));
             PutNewPiece('c', 1, new Bishop(Board, Color.White));
             PutNewPiece('d', 1, new Queen(Board, Color.White));
-            PutNewPiece('e', 1, new King(Board, Color.White));
+            PutNewPiece('e', 1, new King(Board, Color.White, this));
             PutNewPiece('f', 1, new Bishop(Board, Color.White));
             PutNewPiece('g', 1, new Knight(Board, Color.White));
             PutNewPiece('h', 1, new Rook(Board, Color.White));
@@ -243,12 +285,11 @@ namespace ChessConsole.ChessEntities
             PutNewPiece('g', 2, new Pawn(Board, Color.White));
             PutNewPiece('h', 2, new Pawn(Board, Color.White));
 
-
             PutNewPiece('a', 8, new Rook(Board, Color.Black));
             PutNewPiece('b', 8, new Knight(Board, Color.Black));
             PutNewPiece('c', 8, new Bishop(Board, Color.Black));
             PutNewPiece('d', 8, new Queen(Board, Color.Black));
-            PutNewPiece('e', 8, new King(Board, Color.Black));
+            PutNewPiece('e', 8, new King(Board, Color.Black, this));
             PutNewPiece('f', 8, new Bishop(Board, Color.Black));
             PutNewPiece('g', 8, new Knight(Board, Color.Black));
             PutNewPiece('h', 8, new Rook(Board, Color.Black));

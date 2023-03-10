@@ -34,19 +34,19 @@ namespace ChessConsole.ChessEntities
                     array[pos.Line, pos.Column] = true;
                 }
 
-                pos.DefineValues(pos.Line - 2, pos.Column);
+                pos.DefineValues(Position.Line - 2, Position.Column);
                 if (Board.ValidPisition(pos) && Free(pos) && AmountOfMoves == 0)
                 {
                     array[pos.Line, pos.Column] = true;
                 }
 
-                pos.DefineValues(pos.Line - 1, pos.Column - 1);
+                pos.DefineValues(Position.Line - 1, Position.Column - 1);
                 if (Board.ValidPisition(pos) && ExistEnemy(pos))
                 {
                     array[pos.Line, pos.Column] = true;
                 }
 
-                pos.DefineValues(pos.Line - 1, pos.Column + 1);
+                pos.DefineValues(Position.Line - 1, Position.Column + 1);
                 if (Board.ValidPisition(pos) && ExistEnemy(pos))
                 {
                     array[pos.Line, pos.Column] = true;
@@ -60,19 +60,19 @@ namespace ChessConsole.ChessEntities
                     array[pos.Line, pos.Column] = true;
                 }
 
-                pos.DefineValues(pos.Line + 2, pos.Column);
+                pos.DefineValues(Position.Line + 2, Position.Column);
                 if (Board.ValidPisition(pos) && Free(pos) && AmountOfMoves == 0)
                 {
                     array[pos.Line, pos.Column] = true;
                 }
 
-                pos.DefineValues(pos.Line + 1, pos.Column - 1);
+                pos.DefineValues(Position.Line + 1, Position.Column - 1);
                 if (Board.ValidPisition(pos) && ExistEnemy(pos))
                 {
                     array[pos.Line, pos.Column] = true;
                 }
 
-                pos.DefineValues(pos.Line + 1, pos.Column + 1);
+                pos.DefineValues(Position.Line + 1, Position.Column + 1);
                 if (Board.ValidPisition(pos) && ExistEnemy(pos))
                 {
                     array[pos.Line, pos.Column] = true;
